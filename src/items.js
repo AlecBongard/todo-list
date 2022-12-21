@@ -1,27 +1,25 @@
-const Library = (function(){
-    let projects = [];
+const Library = (function Library() {
+  const projects = [];
 
-    return {projects}
-})()
+  return { projects };
+})();
 
-const taskFactory = function(title, desc, dueDate, prio){
+const taskFactory = function taskFactory(title, desc, dueDate, prio) {
+  const editTask = function editTask(part, input) {
+    this.part = input;
+  };
 
-    const editTask = function(part, input){
-        this.part = input;
-    }
+  return { title, desc, dueDate, prio, editTask };
+};
 
-    return {title, desc, dueDate, prio, editTask}
-}
+const projFactory = function projFactory(title, dueDate, desc) {
+  const tasks = [];
 
-const projFactory = function(title, dueDate, desc){
+  const newTask = function newTask(task) {
+    tasks.push(task);
+  };
 
-    let tasks = [];
+  return { title, dueDate, desc, tasks, newTask };
+};
 
-    const newTask = function(task){
-        tasks.push(task);
-    }
-
-    return {title, dueDate, desc, tasks, newTask}
-}
-
-export {taskFactory, projFactory, Library};
+export { taskFactory, projFactory, Library };
