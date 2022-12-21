@@ -1,15 +1,30 @@
+// eslint-disable-next-line no-unused-vars
 import css from "./style.css";
-import { taskFactory, projectFactory } from "./items";
+import { projFactory, Library } from "./items";
+import { DOMUpdate } from "./domUpdate";
 
-const addProj = document.querySelector(".new-proj");
-const projControls = document.querySelector(".proj-controls");
+const projSubmit = document.querySelector('#proj-submit');
+const projTitle = document.querySelector('#proj-title');
+const projDate = document.querySelector('#proj-date');
+const projDesc = document.querySelector('#proj-desc')
 
-addProj.addEventListener('click', ()=>{
+projSubmit.addEventListener('click', (event)=>{
+    event.preventDefault();
 
-    if(!(addProj.classList.contains('proj-input'))){
-        projControls.classList.add('proj-input');
-        addProj.textContent = "-";
-    }else{
-       projControls.classList.remove('proj-input');
-    }
-})
+    const title = projTitle.value;
+    const dueDate = projDate.value;
+    const desc = projDesc.value;
+
+    const newProj = projFactory(title, dueDate, desc);
+
+    /* create key/value pair to indicate project's place in the project library.
+     Will be used when adding project to the DOM */
+    newProj.index = Library.projects.length;
+
+    Library.projects.push(newProj);
+    DOMUpdate.projRefresh();
+
+
+});
+
+

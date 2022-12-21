@@ -1,3 +1,9 @@
+const Library = (function(){
+    let projects = [];
+
+    return {projects}
+})()
+
 const taskFactory = function(title, desc, dueDate, prio){
 
     const editTask = function(part, input){
@@ -7,7 +13,7 @@ const taskFactory = function(title, desc, dueDate, prio){
     return {title, desc, dueDate, prio, editTask}
 }
 
-const projectFactory = function(title, dueDate, desc){
+const projFactory = function(title, dueDate, desc){
 
     let tasks = [];
 
@@ -18,4 +24,4 @@ const projectFactory = function(title, dueDate, desc){
     return {title, dueDate, desc, tasks, newTask}
 }
 
-export {taskFactory, projectFactory};
+export {taskFactory, projFactory, Library};

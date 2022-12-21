@@ -34,7 +34,6 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: lightgreen;
 }
 
 .projects{
@@ -55,7 +54,7 @@ header{
 }
 
 .proj-input{
-    height: 20%;
+    height: 30%;
     width: 100%;
     transition: height .5s, width .5s;
 }
@@ -67,6 +66,7 @@ header{
     border-radius: 15px;
     padding: 10px;
     box-sizing: border-box;
+    overflow: auto;
 }
 
 .proj{
