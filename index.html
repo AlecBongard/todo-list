@@ -9,41 +9,50 @@
   </head>
   <body>
     <div class="wrapper">
-        <header>
-            <div class="header-content">
+      <header>
+        <div class="header-content"></div>
+      </header>
+      <div class="projects">
+        <div class="proj-controls">
+          <div class="new-proj control">+</div>
+          <form action="" id="proj-form" method="post" class="proj-form">
+            <p>New Project</p>
 
+            <div class="input-wrap">
+              <label for="proj-title">Title</label>
+              <input
+                type="text"
+                name="proj-title"
+                placeholder="Enter Title"
+                id="proj-title"
+              />
             </div>
-        </header>
-        <div class="projects">
-            <div class="proj-controls proj-input">
-                <div class="new-proj control">+</div>
-                <form action="" id="proj-form" method="post">
-                    <p>New Project</p>
 
-                    <div class="input-wrap">
-                        <label for="proj-title">Title</label>
-                        <input type="text" name="proj-title" placeholder="Enter Title" id="proj-title">
-                    </div>
-
-                    <div class="input-wrap">
-                        <label for="proj-date">Due Date</label>
-                        <input type="date" name="proj-date" id="proj-date">
-                    </div>
-
-                    <div class="input-wrap">
-                        <label for="proj-desc">Description</label>
-                        <textarea name="proj-desc" rows="3" cols="18" id="proj-desc"></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn" id="proj-submit">Add Project</button>
-                </form>
+            <div class="input-wrap">
+              <label for="proj-date">Due Date</label>
+              <input type="date" name="proj-date" id="proj-date" />
             </div>
-            <div class="projects-content">
+
+            <div class="input-wrap">
+              <label for="proj-desc">Description</label>
+              <textarea
+                name="proj-desc"
+                rows="3"
+                cols="18"
+                id="proj-desc"
+              ></textarea>
             </div>
+
+            <button type="submit" class="submit-btn" id="proj-submit">
+              Add Project
+            </button>
+          </form>
         </div>
-        <div class="todos">
-            <div class="todos-content"></div>
-        </div>
+        <div class="projects-content"></div>
+      </div>
+      <div class="todos">
+        <div class="todos-content"></div>
+      </div>
     </div>
   </body>
 </html>
