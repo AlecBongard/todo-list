@@ -4,7 +4,7 @@ const Library = (function Library() {
   return { projects };
 })();
 
-const taskFactory = function taskFactory(title, desc, dueDate, prio) {
+const taskFactory = function taskFactory(title, dueDate, desc, prio) {
   const editTask = function editTask(part, input) {
     this.part = input;
   };
