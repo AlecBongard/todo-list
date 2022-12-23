@@ -53,6 +53,7 @@ header {
   justify-content: center;
   align-items: center;
   transition: height 0.5s, width 0.5s;
+  flex: none;
 }
 
 .proj-big {

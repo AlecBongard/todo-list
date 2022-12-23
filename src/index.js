@@ -13,6 +13,10 @@ const projContent = document.querySelector(".projects-content");
 
 const todoForm = document.querySelector(".todo-form");
 const todoResize = document.querySelector(".new-todo");
+const todoSubmit = document.querySelector("#todo-submit");
+const todoTitle = document.querySelector('#todo-title');
+const todoDate = document.querySelector('#todo-date');
+const todoDesc = document.querySelector('#todo-desc');
 
 const firstProj = projFactory("a", "1", "qwertyuiop");
 firstProj.tasks.push(taskFactory("a", "1", "qwerty", "low"));
@@ -39,6 +43,22 @@ projSubmit.addEventListener("click", (event) => {
   Library.projects.push(newProj);
   DOMUpdate.projRefresh();
   Listeners.setListeners(projContent, DOMUpdate.todoRefresh, Library.proj);
+});
+
+todoSubmit.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const currentProj = Library.projects[Library.selected];
+
+    const title = todoTitle.value;
+    const dueDate = todoDate.value;
+    const desc = todoDesc.value;
+
+    const newTask = taskFactory(title, dueDate, desc, "low");
+    currentProj.tasks.push(newTask);
+
+    DOMUpdate.todoRefresh(currentProj);
+
 });
 
 projResize.addEventListener("click", () => {

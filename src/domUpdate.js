@@ -70,6 +70,7 @@ const Listeners = (function Listeners() {
 
       node.addEventListener("click", () => {
         func.call(this, Library.projects[index]);
+        Library.selected = index;
       });
     });
   };

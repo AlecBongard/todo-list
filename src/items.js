@@ -1,7 +1,9 @@
 const Library = (function Library() {
+  const selected = 0;
+
   const projects = [];
 
-  return { projects };
+  return { projects, selected };
 })();
 
 const taskFactory = function taskFactory(title, dueDate, desc, prio) {
