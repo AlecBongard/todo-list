@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import css from "./style.css";
 import { projFactory, Library, taskFactory } from "./items";
-import { DOMUpdate } from "./domUpdate";
+import { DOMUpdate, Listeners } from "./domUpdate";
 
 const projForm = document.querySelector(".proj-form");
 const projResize = document.querySelector(".new-proj");
@@ -9,19 +9,19 @@ const projSubmit = document.querySelector("#proj-submit");
 const projTitle = document.querySelector("#proj-title");
 const projDate = document.querySelector("#proj-date");
 const projDesc = document.querySelector("#proj-desc");
+const projContent = document.querySelector(".projects-content");
 
 const todoForm = document.querySelector(".todo-form");
 const todoResize = document.querySelector(".new-todo");
 
 const firstProj = projFactory("a", "1", "qwertyuiop");
-firstProj.tasks.push(
-    taskFactory("a", "1", "qwerty", "low")
-);
-
+firstProj.tasks.push(taskFactory("a", "1", "qwerty", "low"));
+firstProj.index = "0";
 
 Library.projects.push(firstProj);
 DOMUpdate.projRefresh();
-DOMUpdate.todoRefresh(firstProj);
+
+Listeners.setListeners(projContent, DOMUpdate.todoRefresh);
 
 projSubmit.addEventListener("click", (event) => {
   event.preventDefault();
@@ -38,6 +38,7 @@ projSubmit.addEventListener("click", (event) => {
 
   Library.projects.push(newProj);
   DOMUpdate.projRefresh();
+  Listeners.setListeners(projContent, DOMUpdate.todoRefresh, Library.proj);
 });
 
 projResize.addEventListener("click", () => {
@@ -54,16 +55,16 @@ projResize.addEventListener("click", () => {
   }
 });
 
-todoResize.addEventListener("click", ()=>{
-    const inputContainer = todoResize.parentNode;
+todoResize.addEventListener("click", () => {
+  const inputContainer = todoResize.parentNode;
 
-    if (inputContainer.classList.contains("todo-big")) {
-        inputContainer.classList.remove("todo-big");
-        todoResize.textContent = "+";
-        DOMUpdate.toggleForm(todoForm);
-      } else {
-        inputContainer.classList.add("todo-big");
-        todoResize.textContent = "-";
-        setTimeout(() => DOMUpdate.toggleForm(todoForm), 425);
-      }
+  if (inputContainer.classList.contains("todo-big")) {
+    inputContainer.classList.remove("todo-big");
+    todoResize.textContent = "+";
+    DOMUpdate.toggleForm(todoForm);
+  } else {
+    inputContainer.classList.add("todo-big");
+    todoResize.textContent = "-";
+    setTimeout(() => DOMUpdate.toggleForm(todoForm), 425);
+  }
 });
