@@ -22,10 +22,10 @@ const firstProj = projFactory("a", "1", "qwertyuiop");
 firstProj.tasks.push(taskFactory("a", "1", "qwerty", "low"));
 firstProj.index = "0";
 
-Library.projects.push(firstProj);
-DOMUpdate.projRefresh();
+//Library.projects.push(firstProj);
+//DOMUpdate.projRefresh();
 
-Listeners.setListeners(projContent, DOMUpdate.todoRefresh);
+//Listeners.setListeners(projContent, DOMUpdate.todoRefresh);
 
 projSubmit.addEventListener("click", (event) => {
   event.preventDefault();
@@ -42,7 +42,7 @@ projSubmit.addEventListener("click", (event) => {
 
   Library.projects.push(newProj);
   DOMUpdate.projRefresh();
-  Listeners.setListeners(projContent, DOMUpdate.todoRefresh, Library.proj);
+  
 });
 
 todoSubmit.addEventListener("click", (event) => {

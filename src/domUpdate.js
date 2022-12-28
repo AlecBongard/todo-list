@@ -1,8 +1,28 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 import { Library } from "./items";
+import trash from "./imgs/delete.png";
 
 const projects = document.querySelector(".projects-content");
 const todos = document.querySelector(".todos-content");
+
+const Listeners = (function Listeners() {
+  // sets event listeners for each child node of a parent
+  const setListeners = function setListeners(parent, func) {
+    const children = Array.from(parent.childNodes);
+
+    children.forEach((node) => {
+      const index = node.getAttribute("data-index");
+
+      node.addEventListener("click", () => {
+        func.call(this, Library.projects[index]);
+        Library.selected = index;
+      });
+    });
+  };
+
+  return { setListeners };
+})();
 
 const DOMUpdate = (function DOMUpdate() {
   const toggleForm = function toggleForm(form) {
@@ -34,6 +54,14 @@ const DOMUpdate = (function DOMUpdate() {
     });
   };
 
+  const _projRemove = function _projRemove(index){
+    const dataString = `[data-index="${index}"]`;
+    const deletion = document.querySelector(dataString);
+    
+    
+    deletion.remove();
+  }
+
   const projRefresh = function projRefresh() {
     projects.textContent = "";
 
@@ -51,31 +79,37 @@ const DOMUpdate = (function DOMUpdate() {
       projDesc.classList.add("proj-desc");
       projDesc.textContent = project.desc;
 
+      const del = document.createElement("img");
+      del.classList.add("proj-delete");
+      del.setAttribute("src", trash);
+
+
+      del.addEventListener("click", ()=>{
+        Library.projDelete(project.index);
+
+        // reset indices in project library
+        Library.projects.forEach((elem)=>{
+          elem.index=Library.projects.indexOf(elem);
+        });
+        
+        projRefresh();
+      })
+
+      
+
       projects.appendChild(proj);
       proj.appendChild(projTitle);
       proj.appendChild(projDesc);
+      proj.appendChild(del);
     });
+    Listeners.setListeners(projects, todoRefresh, Library.proj);
   };
+
+
 
   return { projRefresh, toggleForm, todoRefresh };
 })();
 
-const Listeners = (function Listeners() {
-  // sets event listeners for each child node of a parent
-  const setListeners = function setListeners(parent, func) {
-    const children = Array.from(parent.childNodes);
 
-    children.forEach((node) => {
-      const index = node.getAttribute("data-index");
-
-      node.addEventListener("click", () => {
-        func.call(this, Library.projects[index]);
-        Library.selected = index;
-      });
-    });
-  };
-
-  return { setListeners };
-})();
 
 export { DOMUpdate, Listeners };

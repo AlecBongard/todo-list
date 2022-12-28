@@ -3,7 +3,13 @@ const Library = (function Library() {
 
   const projects = [];
 
-  return { projects, selected };
+  const projDelete = function projDelete(index){
+    if(index < projects.length){
+      projects.splice(index, 1);
+    }
+  }
+
+  return { projects, selected, projDelete };
 })();
 
 const taskFactory = function taskFactory(title, dueDate, desc, prio) {
