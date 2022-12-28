@@ -121,6 +121,7 @@ header {
 .task {
   display: flex;
   justify-content: space-around;
+  position: relative;
 }
 
 .task:hover {
@@ -138,4 +139,16 @@ header {
 
 .proj:hover .proj-delete{
   display:block;
+}
+
+.task-delete{
+  position: absolute;
+  display: none;
+  right: 2px;
+  height: 15px;
+  width: 15px;
+}
+
+.task:hover .task-delete{
+  display: block;
 }

@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import css from "./style.css";
 import { projFactory, Library, taskFactory } from "./items";
-import { DOMUpdate, Listeners } from "./domUpdate";
+import { DOMUpdate } from "./domUpdate";
 
 const projForm = document.querySelector(".proj-form");
 const projResize = document.querySelector(".new-proj");
@@ -9,7 +9,6 @@ const projSubmit = document.querySelector("#proj-submit");
 const projTitle = document.querySelector("#proj-title");
 const projDate = document.querySelector("#proj-date");
 const projDesc = document.querySelector("#proj-desc");
-const projContent = document.querySelector(".projects-content");
 
 const todoForm = document.querySelector(".todo-form");
 const todoResize = document.querySelector(".new-todo");
@@ -22,10 +21,7 @@ const firstProj = projFactory("a", "1", "qwertyuiop");
 firstProj.tasks.push(taskFactory("a", "1", "qwerty", "low"));
 firstProj.index = "0";
 
-//Library.projects.push(firstProj);
-//DOMUpdate.projRefresh();
 
-//Listeners.setListeners(projContent, DOMUpdate.todoRefresh);
 
 projSubmit.addEventListener("click", (event) => {
   event.preventDefault();
@@ -55,6 +51,10 @@ todoSubmit.addEventListener("click", (event) => {
     const desc = todoDesc.value;
 
     const newTask = taskFactory(title, dueDate, desc, "low");
+
+    // index will be used when associating DOM elements with each task
+    newTask.index = currentProj.tasks.length;
+
     currentProj.tasks.push(newTask);
 
     DOMUpdate.todoRefresh(currentProj);

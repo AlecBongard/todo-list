@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const Library = (function Library() {
   const selected = 0;
 
@@ -17,6 +18,7 @@ const taskFactory = function taskFactory(title, dueDate, desc, prio) {
     this.part = input;
   };
 
+
   return { title, desc, dueDate, prio, editTask };
 };
 
@@ -27,7 +29,11 @@ const projFactory = function projFactory(title, dueDate, desc) {
     tasks.push(task);
   };
 
-  return { title, dueDate, desc, tasks, newTask };
+  const taskDelete = function taskDelete(index){
+    tasks.splice(index, 1);
+  }
+
+  return { title, dueDate, desc, tasks, newTask, taskDelete };
 };
 
 export { taskFactory, projFactory, Library };
