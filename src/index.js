@@ -13,15 +13,13 @@ const projDesc = document.querySelector("#proj-desc");
 const todoForm = document.querySelector(".todo-form");
 const todoResize = document.querySelector(".new-todo");
 const todoSubmit = document.querySelector("#todo-submit");
-const todoTitle = document.querySelector('#todo-title');
-const todoDate = document.querySelector('#todo-date');
-const todoDesc = document.querySelector('#todo-desc');
+const todoTitle = document.querySelector("#todo-title");
+const todoDate = document.querySelector("#todo-date");
+const todoDesc = document.querySelector("#todo-desc");
 
 const firstProj = projFactory("a", "1", "qwertyuiop");
 firstProj.tasks.push(taskFactory("a", "1", "qwerty", "low"));
 firstProj.index = "0";
-
-
 
 projSubmit.addEventListener("click", (event) => {
   event.preventDefault();
@@ -38,27 +36,25 @@ projSubmit.addEventListener("click", (event) => {
 
   Library.projects.push(newProj);
   DOMUpdate.projRefresh();
-  
 });
 
 todoSubmit.addEventListener("click", (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const currentProj = Library.projects[Library.selected];
+  const currentProj = Library.projects[Library.selected];
 
-    const title = todoTitle.value;
-    const dueDate = todoDate.value;
-    const desc = todoDesc.value;
+  const title = todoTitle.value;
+  const dueDate = todoDate.value;
+  const desc = todoDesc.value;
 
-    const newTask = taskFactory(title, dueDate, desc, "low");
+  const newTask = taskFactory(title, dueDate, desc, "low");
 
-    // index will be used when associating DOM elements with each task
-    newTask.index = currentProj.tasks.length;
+  // index will be used when associating DOM elements with each task
+  newTask.index = currentProj.tasks.length;
 
-    currentProj.tasks.push(newTask);
+  currentProj.tasks.push(newTask);
 
-    DOMUpdate.todoRefresh(currentProj);
-
+  DOMUpdate.todoRefresh(currentProj);
 });
 
 projResize.addEventListener("click", () => {

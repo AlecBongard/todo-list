@@ -6,7 +6,7 @@
 .wrapper {
   display: grid;
   grid-template:
-    "head head head" 1fr
+    "head todo todo" 1fr
     "project todo todo" 5fr
     "project todo todo" 5fr / 2fr 3fr 3fr;
   width: 100%;
@@ -23,7 +23,7 @@ header {
   background-color: #fafafa;
   height: 100%;
   width: 100%;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .control {
@@ -72,7 +72,7 @@ header {
 
 .todo-big {
   height: 30%;
-  width: 30%;
+  width: 50%;
   transition: height 0.5s, width 0.5s;
 }
 
@@ -80,7 +80,7 @@ header {
   background-color: #fafafa;
   height: 100%;
   width: 100%;
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 10px;
   box-sizing: border-box;
   overflow: auto;
@@ -110,25 +110,40 @@ header {
   flex-direction: column;
 }
 
+.todo-header {
+  background-color: #fafafa;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  margin: 5px;
+}
+
 .todos-content {
+  box-sizing: border-box;
   background-color: #fafafa;
   height: 100%;
   width: 100%;
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 10px;
 }
 
-.task {
+.task-overview {
   display: flex;
   justify-content: space-around;
   position: relative;
+}
+
+.task {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .task:hover {
   border: 1px solid grey;
 }
 
-.proj-delete{
+.proj-delete {
   position: absolute;
   bottom: 2px;
   right: 2px;
@@ -137,11 +152,11 @@ header {
   width: 20px;
 }
 
-.proj:hover .proj-delete{
-  display:block;
+.proj:hover .proj-delete {
+  display: block;
 }
 
-.task-delete{
+.task-delete {
   position: absolute;
   display: none;
   right: 2px;
@@ -149,6 +164,30 @@ header {
   width: 15px;
 }
 
-.task:hover .task-delete{
+.task:hover .task-delete {
   display: block;
+}
+
+.arrow {
+  transition: transform, 0.2s;
+  justify-self: flex-start;
+}
+
+.arrow-clicked {
+  transform: rotate(180deg);
+  transition: transform, 0.2s;
+}
+
+.desc-container {
+  height: 0px;
+  display: none;
+  margin-left: 15%;
+  color: grey;
+}
+
+.desc-container-clicked {
+  height: auto;
+  width: 50%;
+  display: block;
+  transition: height, 0.5s;
 }

@@ -2,6 +2,7 @@
 /* eslint-disable no-param-reassign */
 import { Library } from "./items";
 import trash from "./imgs/delete.png";
+import arrow from "./imgs/menu-up.png";
 
 const projects = document.querySelector(".projects-content");
 const todos = document.querySelector(".todos-content");
@@ -43,34 +44,61 @@ const DOMUpdate = (function DOMUpdate() {
       // data task corresponds to the the task's index in the project's list of tasks
       taskContainer.setAttribute("data-task", task.index);
 
+      const taskOverview = document.createElement("div");
+      taskOverview.classList.add("task-overview");
+
+      const dropArrow = document.createElement("img");
+      dropArrow.classList.add("arrow");
+      dropArrow.setAttribute("src", arrow);
+
       const taskTitle = document.createElement("p");
       taskTitle.classList.add("task-title");
       taskTitle.textContent = task.title;
 
+      const descContainer = document.createElement("div");
+      descContainer.classList.add("desc-container");
+
       const taskDesc = document.createElement("p");
       taskDesc.classList.add("task-desc");
       taskDesc.textContent = task.desc;
+      descContainer.appendChild(taskDesc);
+
+      const taskDate = document.createElement("p");
+      taskDate.classList.add("task-date");
+      taskDate.textContent = task.dueDate;
 
       const del = document.createElement("img");
       del.classList.add("task-delete");
-      del.setAttribute("src", trash);     
-      
-      del.addEventListener("click", (e)=>{
+      del.setAttribute("src", trash);
+
+      del.addEventListener("click", (e) => {
         e.stopPropagation();
         proj.taskDelete(task.index);
 
-        proj.tasks.forEach((todo)=>{
+        proj.tasks.forEach((todo) => {
           todo.index = proj.tasks.indexOf(todo);
         });
 
         todoRefresh(proj);
+      });
 
-      })
+      dropArrow.addEventListener("click", () => {
+        if (dropArrow.classList.contains("arrow-clicked")) {
+          dropArrow.classList.remove("arrow-clicked");
+          descContainer.classList.remove("desc-container-clicked");
+        } else {
+          dropArrow.classList.add("arrow-clicked");
+          descContainer.classList.add("desc-container-clicked");
+        }
+      });
 
       todos.appendChild(taskContainer);
-      taskContainer.appendChild(taskTitle);
-      taskContainer.appendChild(taskDesc);
       taskContainer.appendChild(del);
+      taskContainer.appendChild(taskOverview);
+      taskContainer.appendChild(descContainer);
+      taskOverview.appendChild(dropArrow);
+      taskOverview.appendChild(taskTitle);
+      taskOverview.appendChild(taskDate);
     });
   };
 
@@ -95,19 +123,17 @@ const DOMUpdate = (function DOMUpdate() {
       del.classList.add("proj-delete");
       del.setAttribute("src", trash);
 
-
-      del.addEventListener("click", (e)=>{
+      del.addEventListener("click", (e) => {
         e.stopPropagation();
         Library.projDelete(project.index);
 
         // reset indices in project library
-        Library.projects.forEach((elem)=>{
-          elem.index=Library.projects.indexOf(elem);
+        Library.projects.forEach((elem) => {
+          elem.index = Library.projects.indexOf(elem);
         });
-        
-        projRefresh();      
-      })
-     
+
+        projRefresh();
+      });
 
       projects.appendChild(proj);
       proj.appendChild(projTitle);
@@ -115,15 +141,10 @@ const DOMUpdate = (function DOMUpdate() {
       proj.appendChild(del);
     });
 
-    
     Listeners.setListeners(projects, todoRefresh);
   };
 
-
-
   return { projRefresh, toggleForm, todoRefresh };
 })();
-
-
 
 export { DOMUpdate, Listeners };

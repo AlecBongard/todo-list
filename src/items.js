@@ -4,11 +4,11 @@ const Library = (function Library() {
 
   const projects = [];
 
-  const projDelete = function projDelete(index){
-    if(index < projects.length){
+  const projDelete = function projDelete(index) {
+    if (index < projects.length) {
       projects.splice(index, 1);
     }
-  }
+  };
 
   return { projects, selected, projDelete };
 })();
@@ -17,7 +17,6 @@ const taskFactory = function taskFactory(title, dueDate, desc, prio) {
   const editTask = function editTask(part, input) {
     this.part = input;
   };
-
 
   return { title, desc, dueDate, prio, editTask };
 };
@@ -29,9 +28,9 @@ const projFactory = function projFactory(title, dueDate, desc) {
     tasks.push(task);
   };
 
-  const taskDelete = function taskDelete(index){
+  const taskDelete = function taskDelete(index) {
     tasks.splice(index, 1);
-  }
+  };
 
   return { title, dueDate, desc, tasks, newTask, taskDelete };
 };
