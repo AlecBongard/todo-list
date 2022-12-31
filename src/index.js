@@ -17,10 +17,6 @@ const todoTitle = document.querySelector("#todo-title");
 const todoDate = document.querySelector("#todo-date");
 const todoDesc = document.querySelector("#todo-desc");
 
-const firstProj = projFactory("a", "1", "qwertyuiop");
-firstProj.tasks.push(taskFactory("a", "1", "qwerty", "low"));
-firstProj.index = "0";
-
 projSubmit.addEventListener("click", (event) => {
   event.preventDefault();
 
