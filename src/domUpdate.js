@@ -111,12 +111,12 @@ const DOMUpdate = (function DOMUpdate() {
       });
 
       todos.appendChild(taskContainer);
-      taskContainer.appendChild(del);
       taskContainer.appendChild(taskOverview);
       taskContainer.appendChild(descContainer);
       taskOverview.appendChild(dropArrow);
       taskOverview.appendChild(taskTitle);
       taskOverview.appendChild(taskDate);
+      taskContainer.appendChild(del);
     });
   };
 
