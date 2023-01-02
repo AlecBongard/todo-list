@@ -21,7 +21,7 @@ const taskFactory = function taskFactory(title, dueDate, desc, prio) {
   return { title, desc, dueDate, prio, editTask };
 };
 
-const projFactory = function projFactory(title, dueDate, desc) {
+const projFactory = function projFactory(title, desc) {
   const tasks = [];
 
   const newTask = function newTask(task) {
@@ -32,7 +32,7 @@ const projFactory = function projFactory(title, dueDate, desc) {
     tasks.splice(index, 1);
   };
 
-  return { title, dueDate, desc, tasks, newTask, taskDelete };
+  return { title, desc, tasks, newTask, taskDelete };
 };
 
 export { taskFactory, projFactory, Library };
