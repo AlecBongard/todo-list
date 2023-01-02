@@ -6,6 +6,7 @@ import arrow from "./imgs/menu-up.png";
 
 const projects = document.querySelector(".projects-content");
 const todos = document.querySelector(".todos-content");
+const header = document.querySelector(".header-content");
 
 const Listeners = (function Listeners() {
   // sets event listeners for each child node of a parent
@@ -34,7 +35,24 @@ const DOMUpdate = (function DOMUpdate() {
     }
   };
 
+  const _headerRefresh = function headerRefresh(proj) {
+    header.textContent = "";
+
+    const headTitle = document.createElement("p");
+    headTitle.classList.add("header-title");
+    headTitle.textContent = proj.title;
+
+    header.append(headTitle);
+
+    const headDesc = document.createElement("p");
+    headDesc.classList.add("header-desc");
+    headDesc.textContent = proj.desc;
+
+    header.append(headDesc);
+  };
+
   const todoRefresh = function todoRefresh(proj) {
+    _headerRefresh(proj);
     todos.textContent = "";
 
     proj.tasks.forEach((task) => {
@@ -115,10 +133,6 @@ const DOMUpdate = (function DOMUpdate() {
       projTitle.classList.add("proj-title");
       projTitle.textContent = project.title;
 
-      const projDesc = document.createElement("p");
-      projDesc.classList.add("proj-desc");
-      projDesc.textContent = project.desc;
-
       const del = document.createElement("img");
       del.classList.add("proj-delete");
       del.setAttribute("src", trash);
@@ -137,7 +151,6 @@ const DOMUpdate = (function DOMUpdate() {
 
       projects.appendChild(proj);
       proj.appendChild(projTitle);
-      proj.appendChild(projDesc);
       proj.appendChild(del);
     });
 

@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: "Roboto";
-  src: url('./fonts/Roboto/Roboto-Black.ttf');
+  src: url("./fonts/Roboto/Roboto-Black.ttf");
   font-weight: 600;
   font-style: bold;
 }
@@ -17,7 +17,7 @@
   font-style: normal;
 }
 
-body{
+body {
   font-family: "Roboto";
   font-weight: 400;
 }
@@ -43,6 +43,16 @@ header {
   height: 100%;
   width: 100%;
   border-radius: 10px;
+  padding: 5px;
+}
+
+.header-title {
+  font-size: 36px;
+}
+
+.header-desc {
+  font-size: 18px;
+  color: grey;
 }
 
 .control {
@@ -79,7 +89,7 @@ header {
   box-shadow: 2px 2px 5px #111827;
 }
 
-.control-content{
+.control-content {
   height: 30px;
   width: 30px;
 }
@@ -100,7 +110,7 @@ header {
   display: none;
 }
 
-.input-wrap{
+.input-wrap {
   display: flex;
   flex-direction: column;
   margin: 2px;

@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import css from "./style.css";
-import plus from "./imgs/plus.png"
-import minus from "./imgs/minus.png"
+import plus from "./imgs/plus.png";
+import minus from "./imgs/minus.png";
 import { projFactory, Library, taskFactory } from "./items";
 import { DOMUpdate } from "./domUpdate";
 
@@ -10,7 +10,7 @@ const projResize = document.querySelector(".new-proj");
 const projSubmit = document.querySelector("#proj-submit");
 const projTitle = document.querySelector("#proj-title");
 const projDesc = document.querySelector("#proj-desc");
-const projAdd = document.querySelector("#proj-add")
+const projAdd = document.querySelector("#proj-add");
 
 const todoForm = document.querySelector(".todo-form");
 const todoResize = document.querySelector(".new-todo");
