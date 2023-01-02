@@ -37,6 +37,8 @@
             <div class="input-wrap">
               <label for="proj-desc">Description</label>
               <textarea
+                maxlength="100"
+                placeholder="A brief description"
                 name="proj-desc"
                 rows="3"
                 cols="18"
@@ -52,6 +54,11 @@
         <div class="projects-content"></div>
       </div>
       <div class="todos">
+        <div class="todo-header">
+          <p class="spacing"></p>
+          <p class="todo-title">Task Title</p>
+          <p class="todo-date">Due Date</p>
+        </div>
         <div class="controls">
           <div class="new-todo control">
             <img
@@ -92,11 +99,6 @@
               Add Task
             </button>
           </form>
-        </div>
-        <div class="todo-header">
-          <p class="spacing"></p>
-          <p class="todo-title">Task Title</p>
-          <p class="todo-date">Due Date</p>
         </div>
         <div class="todos-content"></div>
       </div>
