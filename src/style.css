@@ -30,12 +30,13 @@ body {
     "project todo todo" 5fr / 2fr 3fr 3fr;
   width: 100%;
   height: 100vh;
-  background-color: #f3f4f6;
+  background-color: #4b5563;
 }
 
 header {
   grid-area: head;
   padding: 10px;
+  margin: 5px;
 }
 
 .header-content {
@@ -70,7 +71,7 @@ header {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  background-color: #4b5563;
+  background-color: #fafafa;
   border-radius: 10px;
   margin: 10px;
 }
@@ -86,7 +87,7 @@ header {
   align-items: center;
   transition: height 0.5s, width 0.5s;
   flex: none;
-  box-shadow: 2px 2px 5px #111827;
+  box-shadow: 2px 3px 5px #676767;
 }
 
 .control-content {
@@ -143,6 +144,8 @@ header {
   padding: 3px;
   margin: 0 0 3px 0;
   position: relative;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .proj:hover {
@@ -158,18 +161,18 @@ header {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  background-color: #4b5563;
+  background-color: #fafafa;
   border-radius: 10px;
   margin: 10px;
 }
 
 .todo-header {
   background-color: #fafafa;
-  box-shadow: 2px 2px 5px grey;
+  box-shadow: 2px 3px 5px #676767;
   border-radius: 10px;
   display: flex;
   justify-content: flex-start;
-  margin: 5px;
+  margin: 5px 5px 10px 5px;
 }
 
 .todo-title {
