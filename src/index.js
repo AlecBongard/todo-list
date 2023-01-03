@@ -153,6 +153,10 @@ todoSubmit.addEventListener("click", (event) => {
     currentProj.tasks.push(newTask);
 
     DOMUpdate.todoRefresh(currentProj);
+
+    todoTitle.value = "";
+    todoDate.value = "";
+    todoDesc.value = "";
   }
 });
 
