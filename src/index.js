@@ -20,6 +20,21 @@ const todoDate = document.querySelector("#todo-date");
 const todoDesc = document.querySelector("#todo-desc");
 const todoAdd = document.querySelector("#todo-add");
 
+window.addEventListener("load", () => {
+  if (localStorage.length) {
+    const localKeys = Object.keys(localStorage);
+
+    localKeys.forEach((key) => {
+      const projInfo = JSON.parse(localStorage[key]);
+      const proj = projFactory(projInfo.title, projInfo.desc);
+      proj.index = Library.projects.length;
+      Library.projects.push(proj);
+    });
+
+    DOMUpdate.projRefresh();
+  }
+});
+
 projSubmit.addEventListener("click", (event) => {
   event.preventDefault();
 
@@ -31,6 +46,9 @@ projSubmit.addEventListener("click", (event) => {
   /* create key/value pair to indicate project's place in the project library.
      Will be used when removing project from the DOM */
   newProj.index = Library.projects.length;
+
+  const infoObj = { title, desc };
+  localStorage[newProj.title] = JSON.stringify(infoObj);
 
   Library.projects.push(newProj);
   DOMUpdate.projRefresh();
