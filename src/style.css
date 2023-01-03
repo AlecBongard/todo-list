@@ -23,6 +23,13 @@
   font-weight: 200;
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto/Roboto-LightItalic.ttf");
+  font-style: italic;
+  font-weight: 200;
+}
+
 body {
   font-family: "Roboto";
   font-weight: 400;
@@ -117,7 +124,7 @@ header {
 }
 
 .proj-big {
-  height: 175px;
+  height: 185px;
   width: 100%;
   transition: height 0.5s, width 0.5s;
   justify-content: flex-start;
@@ -141,7 +148,7 @@ header {
 }
 
 .todo-big {
-  height: 200px;
+  height: 210px;
   width: 30%;
   justify-content: flex-start;
   transition: height 0.5s, width 0.5s;
@@ -190,6 +197,13 @@ header {
   margin: 10px;
 }
 
+.empty-notice {
+  font-style: italic;
+  font-weight: 200;
+  align-self: center;
+  color: #4a4a4a;
+}
+
 .todo-header {
   background-color: #fafafa;
   display: flex;
@@ -204,6 +218,8 @@ header {
 .todos-content {
   box-sizing: border-box;
   background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
   border-radius: 10px;
@@ -284,4 +300,9 @@ header {
   width: 50%;
   display: block;
   transition: height, 0.5s;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
 }

@@ -19,6 +19,19 @@ const todoTitle = document.querySelector("#todo-title");
 const todoDate = document.querySelector("#todo-date");
 const todoDesc = document.querySelector("#todo-desc");
 const todoAdd = document.querySelector("#todo-add");
+const todosContent = document.querySelector(".todos-content");
+
+const errorText = document.createElement("p");
+errorText.id = "proj-error";
+errorText.classList.add("error-text");
+errorText.textContent = "";
+projForm.appendChild(errorText);
+
+const todoError = document.createElement("p");
+todoError.id = "todo-error";
+todoError.classList.add("error-text");
+todoError.textContent = "";
+todoForm.appendChild(todoError);
 
 window.addEventListener("load", () => {
   if (localStorage.length) {
@@ -47,6 +60,15 @@ window.addEventListener("load", () => {
 
     DOMUpdate.projRefresh();
   }
+
+  if (Library.projects[0]) {
+    DOMUpdate.todoRefresh(Library.projects[0]);
+  } else {
+    const emptyNotice = document.createElement("p");
+    emptyNotice.classList.add("empty-notice");
+    emptyNotice.textContent = "Please select a project";
+    todosContent.appendChild(emptyNotice);
+  }
 });
 
 projSubmit.addEventListener("click", (event) => {
@@ -55,17 +77,40 @@ projSubmit.addEventListener("click", (event) => {
   const title = projTitle.value;
   const desc = projDesc.value;
 
-  const newProj = projFactory(title, desc);
+  let duplicate = false;
+  let blank = false;
 
-  /* create key/value pair to indicate project's place in the project library.
-     Will be used when removing project from the DOM */
-  newProj.index = Library.projects.length;
+  if (!title) {
+    blank = true;
+  }
 
-  const infoObj = { title, desc, tasks: {} };
-  localStorage[newProj.title] = JSON.stringify(infoObj);
+  Library.projects.forEach((project) => {
+    if (project.title === title) {
+      duplicate = true;
+    }
+  });
 
-  Library.projects.push(newProj);
-  DOMUpdate.projRefresh();
+  if (!(duplicate || blank)) {
+    const newProj = projFactory(title, desc);
+
+    /* create key/value pair to indicate project's place in the project library.
+      Will be used when removing project from the DOM */
+    newProj.index = Library.projects.length;
+
+    const infoObj = { title, desc, tasks: {} };
+    localStorage[newProj.title] = JSON.stringify(infoObj);
+
+    Library.projects.push(newProj);
+    DOMUpdate.projRefresh();
+    projTitle.value = "";
+    projDesc.value = "";
+
+    errorText.textContent = "";
+  } else if (duplicate) {
+    errorText.textContent = "A project with that name already exists.";
+  } else if (blank) {
+    errorText.textContent = "Project name must not be blank.";
+  }
 });
 
 todoSubmit.addEventListener("click", (event) => {
@@ -77,19 +122,38 @@ todoSubmit.addEventListener("click", (event) => {
   const dueDate = new Date(todoDate.value);
   const desc = todoDesc.value;
 
-  const newTask = taskFactory(title, dueDate, desc, "low");
+  let duplicate = false;
+  currentProj.tasks.forEach((task) => {
+    if (title === task.title) {
+      duplicate = true;
+    }
+  });
 
-  // index will be used when associating DOM elements with each task
-  newTask.index = currentProj.tasks.length;
+  if (!title) {
+    todoError.textContent = "Title must not be blank.";
+  } else if (
+    !(dueDate.getDate() || dueDate.getFullYear() || dueDate.getMonth())
+  ) {
+    todoError.textContent = "Please enter a valid date.";
+  } else if (duplicate) {
+    todoError.textContent = "There is already a task with this title.";
+  } else if (!currentProj) {
+    todoError.textContent = "Please select a project.";
+  } else {
+    const newTask = taskFactory(title, dueDate, desc, "low");
 
-  const infoObj = { title, dueDate, desc, index: newTask.index };
-  const proj = JSON.parse(localStorage[currentProj.title]);
-  proj.tasks[title] = JSON.stringify(infoObj);
-  localStorage[currentProj.title] = JSON.stringify(proj);
+    // index will be used when associating DOM elements with each task
+    newTask.index = currentProj.tasks.length;
 
-  currentProj.tasks.push(newTask);
+    const infoObj = { title, dueDate, desc, index: newTask.index };
+    const proj = JSON.parse(localStorage[currentProj.title]);
+    proj.tasks[title] = JSON.stringify(infoObj);
+    localStorage[currentProj.title] = JSON.stringify(proj);
 
-  DOMUpdate.todoRefresh(currentProj);
+    currentProj.tasks.push(newTask);
+
+    DOMUpdate.todoRefresh(currentProj);
+  }
 });
 
 projResize.addEventListener("click", () => {
