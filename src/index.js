@@ -29,6 +29,20 @@ window.addEventListener("load", () => {
       const proj = projFactory(projInfo.title, projInfo.desc);
       proj.index = Library.projects.length;
       Library.projects.push(proj);
+
+      const taskKeys = Object.keys(projInfo.tasks);
+      taskKeys.forEach((taskKey) => {
+        const taskInfo = JSON.parse(projInfo.tasks[taskKey]);
+        taskInfo.dueDate = new Date(Date.parse(taskInfo.dueDate));
+        const task = taskFactory(
+          taskInfo.title,
+          taskInfo.dueDate,
+          taskInfo.desc,
+          "low"
+        );
+        task.index = proj.tasks.length;
+        proj.tasks.push(task);
+      });
     });
 
     DOMUpdate.projRefresh();
@@ -47,7 +61,7 @@ projSubmit.addEventListener("click", (event) => {
      Will be used when removing project from the DOM */
   newProj.index = Library.projects.length;
 
-  const infoObj = { title, desc };
+  const infoObj = { title, desc, tasks: {} };
   localStorage[newProj.title] = JSON.stringify(infoObj);
 
   Library.projects.push(newProj);
@@ -67,6 +81,11 @@ todoSubmit.addEventListener("click", (event) => {
 
   // index will be used when associating DOM elements with each task
   newTask.index = currentProj.tasks.length;
+
+  const infoObj = { title, dueDate, desc, index: newTask.index };
+  const proj = JSON.parse(localStorage[currentProj.title]);
+  proj.tasks[title] = JSON.stringify(infoObj);
+  localStorage[currentProj.title] = JSON.stringify(proj);
 
   currentProj.tasks.push(newTask);
 

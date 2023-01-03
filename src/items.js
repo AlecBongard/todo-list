@@ -6,6 +6,7 @@ const Library = (function Library() {
 
   const projDelete = function projDelete(index) {
     if (index < projects.length) {
+      window.localStorage.removeItem(projects[index].title);
       projects.splice(index, 1);
     }
   };
@@ -29,6 +30,9 @@ const projFactory = function projFactory(title, desc) {
   };
 
   const taskDelete = function taskDelete(index) {
+    const projParsed = JSON.parse(localStorage[title]);
+    delete projParsed.tasks[tasks[index].title];
+    localStorage[title] = JSON.stringify(projParsed);
     tasks.splice(index, 1);
   };
 
