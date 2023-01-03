@@ -17,6 +17,12 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto/Roboto-Light.ttf");
+  font-weight: 200;
+}
+
 body {
   font-family: "Roboto";
   font-weight: 400;
@@ -48,11 +54,13 @@ header {
 }
 
 .header-title {
+  color: #0f172a;
   font-size: 36px;
 }
 
 .header-desc {
   font-size: 18px;
+  font-weight: 200;
   color: grey;
 }
 
@@ -90,17 +98,22 @@ header {
   box-shadow: 2px 3px 5px #676767;
 }
 
+.form-title {
+  font-size: 20px;
+  color: #0f172a;
+}
+
 .control-content {
   height: 30px;
   width: 30px;
 }
 
 .proj-big {
-  height: 30%;
+  height: 175px;
   width: 100%;
   transition: height 0.5s, width 0.5s;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .proj-form {
@@ -115,10 +128,12 @@ header {
   display: flex;
   flex-direction: column;
   margin: 2px;
+  color: #0f172a;
+  font-size: 14px;
 }
 
 .todo-big {
-  height: 30%;
+  height: 200px;
   width: 30%;
   justify-content: flex-start;
   transition: height 0.5s, width 0.5s;
@@ -130,6 +145,7 @@ header {
   width: 100%;
   border-radius: 10px;
   padding: 10px;
+  border: 1px solid grey;
   box-sizing: border-box;
   overflow: auto;
 }
@@ -168,15 +184,13 @@ header {
 
 .todo-header {
   background-color: #fafafa;
-  box-shadow: 2px 3px 5px #676767;
-  border-radius: 10px;
   display: flex;
-  justify-content: flex-start;
-  margin: 5px 5px 10px 5px;
+  justify-content: space-evenly;
+  margin: 5px 15px;
 }
 
-.todo-title {
-  margin: 0 25%;
+.todo-view {
+  align-self: flex-start;
 }
 
 .todos-content {
@@ -186,16 +200,20 @@ header {
   width: 100%;
   border-radius: 10px;
   padding: 10px;
+  border: 1px solid grey;
 }
 
 .task-overview {
   display: flex;
-  justify-content: flex start;
+  justify-content: space-evenly;
   position: relative;
 }
 
-.task-title {
-  margin: 0 25%;
+.text-wrap {
+  text-align: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .task {
@@ -237,7 +255,6 @@ header {
 .arrow {
   transform: rotate(90deg);
   transition: transform, 0.2s;
-  justify-self: flex-start;
   cursor: pointer;
 }
 

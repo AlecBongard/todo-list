@@ -42,7 +42,7 @@ todoSubmit.addEventListener("click", (event) => {
   const currentProj = Library.projects[Library.selected];
 
   const title = todoTitle.value;
-  const dueDate = todoDate.value;
+  const dueDate = new Date(todoDate.value);
   const desc = todoDesc.value;
 
   const newTask = taskFactory(title, dueDate, desc, "low");

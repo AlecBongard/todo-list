@@ -62,6 +62,13 @@ const DOMUpdate = (function DOMUpdate() {
       // data task corresponds to the the task's index in the project's list of tasks
       taskContainer.setAttribute("data-task", task.index);
 
+      const titleWrap = document.createElement("div");
+      const dateWrap = document.createElement("div");
+      const arrowWrap = document.createElement("div");
+      arrowWrap.classList.add("text-wrap");
+      dateWrap.classList.add("text-wrap");
+      titleWrap.classList.add("text-wrap");
+
       const taskOverview = document.createElement("div");
       taskOverview.classList.add("task-overview");
 
@@ -83,7 +90,11 @@ const DOMUpdate = (function DOMUpdate() {
 
       const taskDate = document.createElement("p");
       taskDate.classList.add("task-date");
-      taskDate.textContent = task.dueDate;
+      const dateDay = task.dueDate.getDate();
+      const dateMonth = task.dueDate.getMonth();
+      const dateYear = task.dueDate.getFullYear();
+
+      taskDate.textContent = `${dateMonth}/${dateDay}/${dateYear}`;
 
       const del = document.createElement("img");
       del.classList.add("task-delete");
@@ -113,9 +124,12 @@ const DOMUpdate = (function DOMUpdate() {
       todos.appendChild(taskContainer);
       taskContainer.appendChild(taskOverview);
       taskContainer.appendChild(descContainer);
-      taskOverview.appendChild(dropArrow);
-      taskOverview.appendChild(taskTitle);
-      taskOverview.appendChild(taskDate);
+      taskOverview.appendChild(arrowWrap);
+      arrowWrap.appendChild(dropArrow);
+      taskOverview.appendChild(titleWrap);
+      titleWrap.appendChild(taskTitle);
+      taskOverview.appendChild(dateWrap);
+      dateWrap.appendChild(taskDate);
       taskContainer.appendChild(del);
     });
   };
