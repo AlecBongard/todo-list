@@ -94,7 +94,7 @@ const DOMUpdate = (function DOMUpdate() {
       const dateMonth = task.dueDate.getMonth();
       const dateYear = task.dueDate.getFullYear();
 
-      taskDate.textContent = `${dateMonth}/${dateDay}/${dateYear}`;
+      taskDate.textContent = `${dateMonth + 1} / ${dateDay + 1} / ${dateYear}`;
 
       const del = document.createElement("img");
       del.classList.add("task-delete");

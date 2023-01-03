@@ -15,11 +15,7 @@ const Library = (function Library() {
 })();
 
 const taskFactory = function taskFactory(title, dueDate, desc, prio) {
-  const editTask = function editTask(part, input) {
-    this.part = input;
-  };
-
-  return { title, desc, dueDate, prio, editTask };
+  return { title, desc, dueDate, prio };
 };
 
 const projFactory = function projFactory(title, desc) {

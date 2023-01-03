@@ -91,7 +91,7 @@ header {
   align-self: flex-start;
   color: #0f172a;
   font-size: 24px;
-  margin: 10px 10px 40px 10px;
+  margin: 10px 10px 25px 10px;
 }
 
 .controls {
@@ -143,8 +143,8 @@ header {
 }
 
 .todo-big {
-  height: 210px;
-  width: 30%;
+  height: 250px;
+  width: 250px;
   justify-content: flex-start;
   transition: height 0.5s, width 0.5s;
 }
@@ -169,14 +169,11 @@ header {
   position: relative;
   font-size: 20px;
   cursor: pointer;
+  border: 1px solid rgb(0, 0, 0, 0);
 }
 
 .proj:hover {
   border: 1px solid lightgrey;
-}
-
-.proj-desc {
-  color: grey;
 }
 
 .todos {
@@ -219,6 +216,7 @@ header {
   width: 100%;
   border-radius: 10px;
   padding: 10px;
+  overflow: scroll;
 }
 
 .task:nth-child(even) {
@@ -245,6 +243,8 @@ header {
   display: flex;
   flex-direction: column;
   border-radius: 5px;
+  box-sizing: border-box;
+  border: 1px solid rgb(0, 0, 0, 0);
 }
 
 .task:hover {
@@ -264,12 +264,19 @@ header {
   display: block;
 }
 
+.proj-title {
+  font-size: 18px;
+  font-weight: 200;
+}
+
 .task-delete {
   position: absolute;
   display: none;
   right: 2px;
   height: 15px;
   width: 15px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .task:hover .task-delete {
