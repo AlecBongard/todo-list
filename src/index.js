@@ -115,49 +115,53 @@ projSubmit.addEventListener("click", (event) => {
 
 todoSubmit.addEventListener("click", (event) => {
   event.preventDefault();
+  try{
+    const currentProj = Library.projects[Library.selected];
 
-  const currentProj = Library.projects[Library.selected];
-
-  const title = todoTitle.value;
-  const dueDate = new Date(todoDate.value);
-  const desc = todoDesc.value;
-
-  let duplicate = false;
-  currentProj.tasks.forEach((task) => {
-    if (title === task.title) {
-      duplicate = true;
+    const title = todoTitle.value;
+    const dueDate = new Date(todoDate.value);
+    const desc = todoDesc.value;
+  
+    let duplicate = false;
+    currentProj.tasks.forEach((task) => {
+      if (title === task.title) {
+        duplicate = true;
+      }
+    });
+  
+    if (!title) {
+      todoError.textContent = "Title must not be blank.";
+    } else if (
+      !(dueDate.getDate() || dueDate.getFullYear() || dueDate.getMonth())
+    ) {
+      todoError.textContent = "Please enter a valid date.";
+    } else if (duplicate) {
+      todoError.textContent = "There is already a task with this title.";
+    } else if (!currentProj) {
+      todoError.textContent = "Please select a project.";
+    } else {
+      const newTask = taskFactory(title, dueDate, desc, "low");
+  
+      // index will be used when associating DOM elements with each task
+      newTask.index = currentProj.tasks.length;
+  
+      const infoObj = { title, dueDate, desc, index: newTask.index };
+      const proj = JSON.parse(localStorage[currentProj.title]);
+      proj.tasks[title] = JSON.stringify(infoObj);
+      localStorage[currentProj.title] = JSON.stringify(proj);
+  
+      currentProj.tasks.push(newTask);
+  
+      DOMUpdate.todoRefresh(currentProj);
+  
+      todoTitle.value = "";
+      todoDate.value = "";
+      todoDesc.value = "";
     }
-  });
-
-  if (!title) {
-    todoError.textContent = "Title must not be blank.";
-  } else if (
-    !(dueDate.getDate() || dueDate.getFullYear() || dueDate.getMonth())
-  ) {
-    todoError.textContent = "Please enter a valid date.";
-  } else if (duplicate) {
-    todoError.textContent = "There is already a task with this title.";
-  } else if (!currentProj) {
-    todoError.textContent = "Please select a project.";
-  } else {
-    const newTask = taskFactory(title, dueDate, desc, "low");
-
-    // index will be used when associating DOM elements with each task
-    newTask.index = currentProj.tasks.length;
-
-    const infoObj = { title, dueDate, desc, index: newTask.index };
-    const proj = JSON.parse(localStorage[currentProj.title]);
-    proj.tasks[title] = JSON.stringify(infoObj);
-    localStorage[currentProj.title] = JSON.stringify(proj);
-
-    currentProj.tasks.push(newTask);
-
-    DOMUpdate.todoRefresh(currentProj);
-
-    todoTitle.value = "";
-    todoDate.value = "";
-    todoDesc.value = "";
+  }catch{
+    todoError.textContent = "Please select a project before creating a task";
   }
+
 });
 
 projResize.addEventListener("click", () => {
