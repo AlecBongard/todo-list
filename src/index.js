@@ -21,6 +21,12 @@ const todoDesc = document.querySelector("#todo-desc");
 const todoAdd = document.querySelector("#todo-add");
 const todosContent = document.querySelector(".todos-content");
 
+const controlContent = document.querySelectorAll(".control-content");
+
+controlContent.forEach(node=>{
+  node.setAttribute("src", plus);
+});
+
 const errorText = document.createElement("p");
 errorText.id = "proj-error";
 errorText.classList.add("error-text");
